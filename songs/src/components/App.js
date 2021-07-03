@@ -7,6 +7,9 @@ const App = () => {
   return (
     <div className="ui container grid">
     <div className="ui row">
+      <h1>Quality Spotify Songs</h1>
+    </div>
+    <div className="ui row">
       <SearchBar></SearchBar>
     </div>
       <div className="ui row">

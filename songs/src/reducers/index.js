@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-const songsReducer = (songs=[], action) => {
+const fetchSongsReducer = (songs=[], action) => {
   if (action.type === "FETCH_SONGS") {
     return action.payload;
   }
@@ -16,6 +16,6 @@ const selectedSongReducer = (selectedSong = null, action) => {
 };
 
 export default combineReducers({
-  songs: songsReducer,
+  songs: fetchSongsReducer,
   selectedSong: selectedSongReducer,
 });

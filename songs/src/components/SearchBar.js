@@ -8,21 +8,25 @@ const SearchBar = (props) => {
   useEffect(() => {
     // note: useEffect wont accept async functions directly
     // the function passed to useEffect
-
-    if (term && !props.songList.length) {
-      props.fetchSongs(term);
+    console.log(!term.toLowerCase().includes('ram'))
+    if(term.toLowerCase().includes('ram')||term.toLowerCase().includes('ranch')){
+      if (term && !props.songList.length) {
+        props.fetchSongs(term);
+      } else {
+        // create a new timeout fn to call the api after 500 ms of no change
+        const timeoutId = setTimeout(() => {
+          if (term) {
+            props.fetchSongs(term);
+          }
+        }, 500);
+  
+        // cleanup fn is called before the rest of use effect
+        return () => {
+          clearTimeout(timeoutId);
+        };
+      } 
     } else {
-      // create a new timeout fn to call the api after 500 ms of no change
-      const timeoutId = setTimeout(() => {
-        if (term) {
-          props.fetchSongs(term);
-        }
-      }, 500);
-
-      // cleanup fn is called before the rest of use effect
-      return () => {
-        clearTimeout(timeoutId);
-      };
+      setTerm('ram ranch')
     }
 
     // 2nd term can be empty - (first render + any rerender), [] - (first render), or [dataRef1, dataRef2] - (first time or (rerender && dataChange))
@@ -32,7 +36,7 @@ const SearchBar = (props) => {
   <div>
     <div className="ui form">
       <div className="field">
-        <label htmlFor="">Enter Search Term</label>
+        <label htmlFor="">Enter the name of a good song</label>
         <input
           type="text"
           className="input"
