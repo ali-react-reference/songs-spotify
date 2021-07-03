@@ -6,10 +6,13 @@ class SongList extends Component {
   // I want this to refresh on the first render and every time there is a click
   componentDidMount() {
     this.props.fetchSongs("ram ranch");
+    if(this.props.songs.length>0){
+      this.props.selectSong(this.props.songs[0])
+    }
   }
 
   renderList() {
-    console.log(this.props.songs);
+    // console.log(this.props.songs);
     return this.props.songs.map((song) => {
       return (
         <div className="item" key={song.id}>

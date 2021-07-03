@@ -8,7 +8,6 @@ const SearchBar = (props) => {
   useEffect(() => {
     // note: useEffect wont accept async functions directly
     // the function passed to useEffect
-    console.log(!term.toLowerCase().includes('ram'))
     if(term.toLowerCase().includes('ram')||term.toLowerCase().includes('ranch')){
       if (term && !props.songList.length) {
         props.fetchSongs(term);
