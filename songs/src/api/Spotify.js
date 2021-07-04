@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const spotifyCreds = process.env.REACT_APP_SPOTIFY_CREDENTIALS
-console.log(spotifyCreds)
+// console.log(spotifyCreds)
 export const spotify = axios.create({
   baseURL: "https://api.spotify.com/v1/",
   headers: {

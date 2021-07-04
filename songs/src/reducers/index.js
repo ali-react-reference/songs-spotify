@@ -1,21 +1,10 @@
 import { combineReducers } from "redux";
-
-const fetchSongsReducer = (songs=[], action) => {
-  if (action.type === "FETCH_SONGS") {
-    return action.payload;
-  }
-  return songs
-};
-
-const selectedSongReducer = (selectedSong = null, action) => {
-  if (action.type === "SONG_SELECTED") {
-    return action.payload;
-  }
-  console.log(selectedSong);
-  return selectedSong;
-};
+import fetchSongsReducer from './fetchSongsReducer'
+import selectedSongReducer from './selectedSongReducer'
+import fetchSongFeaturesReducer from './getSongFeaturesReducer'
 
 export default combineReducers({
   songs: fetchSongsReducer,
   selectedSong: selectedSongReducer,
+  songsFeatures: fetchSongFeaturesReducer
 });

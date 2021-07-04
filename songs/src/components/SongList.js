@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { selectSong, fetchSongs } from "../actions";
+import { selectSong, fetchSongs, getSongFeatures } from "../actions";
 
 class SongList extends Component {
   // I want this to refresh on the first render and every time there is a click
   componentDidMount() {
-    this.props.fetchSongs("ram ranch");
+    this.props.fetchSongs("mr brightside");
     if(this.props.songs.length>0){
       this.props.selectSong(this.props.songs[0])
     }
+  }
+
+  onSongButtonClicked(song){
+    this.props.selectSong(song)
+    // this.props.getSongFeatures(song.id)
   }
 
   renderList() {
@@ -19,7 +24,7 @@ class SongList extends Component {
           <div className="right floated content">
             <button
               className="ui button primary"
-              onClick={() => this.props.selectSong(song)}
+              onClick={() => this.onSongButtonClicked(song)}
             >
               Select
             </button>
@@ -38,9 +43,9 @@ class SongList extends Component {
   }
 }
 
-// getting data into the component
+// getting some state data into the props for the component
 const mapStateToProps = (state) => {
   return { songs: state.songs };
 };
 
-export default connect(mapStateToProps, { selectSong, fetchSongs })(SongList);
+export default connect(mapStateToProps, { selectSong, fetchSongs, getSongFeatures })(SongList);

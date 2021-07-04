@@ -1,19 +1,19 @@
 import React, { useEffect, useRef } from "react";
-import ReactDOM from 'react-dom';
 import { connect } from "react-redux";
+import SongData from './SongData' 
 
 const SongDetail = ({ song }) => {
   const ref = useRef();
 
-  useEffect(()=>{
+  useEffect(() => {
     // hack to re-load audio control
     // let element = ReactDOM.findDOMNode(this)
     // let audio = element.querySelector('audio')
     if (ref.current) {
       ref.current.load();
-      ref.current.play();
+      ref.current.pause();
     }
-  },[song])
+  }, [song]);
 
   if (!song) {
     return <div>Select a song</div>;
@@ -35,12 +35,16 @@ const SongDetail = ({ song }) => {
           </audio>
         </div>
       </div>
+      <SongData songId={song.id}></SongData>
     </div>
   );
 };
 
+// can pass in 'ownProps' too eg const mapStateToProps = (state, ownProps)  
 const mapStateToProps = (state) => {
-  return { song: state.selectedSong };
+  return {
+    song: state.selectedSong,
+  };
 };
 
 export default connect(mapStateToProps)(SongDetail);
